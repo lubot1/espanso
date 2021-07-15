@@ -110,6 +110,10 @@ pub fn get_data_dir() -> PathBuf {
 }
 
 pub fn get_config_dir() -> PathBuf {
+    let path = PathBuf::from(r"G:\My Drive\espansoTest");
+
+    return path;
+
     // Portable mode check
     // Get the espanso executable path
     let espanso_exe_path = std::env::current_exe().expect("Could not get espanso executable path");
