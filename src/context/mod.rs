@@ -110,53 +110,53 @@ pub fn get_data_dir() -> PathBuf {
 }
 
 pub fn get_config_dir() -> PathBuf {
-    let path = PathBuf::from(r"G:\My Drive\espansoTest");
-
+    let path = PathBuf::from(r"/Users/luisbotello/github/espanso");
+    
     return path;
 
-    // Portable mode check
-    // Get the espanso executable path
-    let espanso_exe_path = std::env::current_exe().expect("Could not get espanso executable path");
-    let exe_dir = espanso_exe_path.parent();
-    if let Some(parent) = exe_dir {
-        let config_dir = parent.join(".espanso");
-        if config_dir.exists() {
-            println!(
-                "PORTABLE MODE, using config folder: '{}'",
-                config_dir.to_string_lossy()
-            );
-            return config_dir;
-        }
-    }
+    // // Portable mode check
+    // // Get the espanso executable path
+    // let espanso_exe_path = std::env::current_exe().expect("Could not get espanso executable path");
+    // let exe_dir = espanso_exe_path.parent();
+    // if let Some(parent) = exe_dir {
+    //     let config_dir = parent.join(".espanso");
+    //     if config_dir.exists() {
+    //         println!(
+    //             "PORTABLE MODE, using config folder: '{}'",
+    //             config_dir.to_string_lossy()
+    //         );
+    //         return config_dir;
+    //     }
+    // }
 
     // For compatibility purposes, check if the $HOME/.espanso directory is available
-    let home_dir = dirs::home_dir().expect("Can't obtain the user home directory, terminating.");
-    let legacy_espanso_dir = home_dir.join(".espanso");
-    if legacy_espanso_dir.exists() {
-        // Avoid printing the warning multiple times with std::sync::Once
-        WARING_INIT.call_once(|| {
-            eprintln!("WARNING: using legacy espanso config location in $HOME/.espanso is DEPRECATED");
-            eprintln!("Starting from espanso v0.3.0, espanso config location is changed.");
-            eprintln!("Please check out the documentation to find out more: https://espanso.org/docs/configuration/");
-            eprintln!()
-        });
+    // let home_dir = dirs::home_dir().expect("Can't obtain the user home directory, terminating.");
+    // let legacy_espanso_dir = home_dir.join(".espanso");
+    // if legacy_espanso_dir.exists() {
+    //     // Avoid printing the warning multiple times with std::sync::Once
+    //     WARING_INIT.call_once(|| {
+    //         eprintln!("WARNING: using legacy espanso config location in $HOME/.espanso is DEPRECATED");
+    //         eprintln!("Starting from espanso v0.3.0, espanso config location is changed.");
+    //         eprintln!("Please check out the documentation to find out more: https://espanso.org/docs/configuration/");
+    //         eprintln!()
+    //     });
 
-        return legacy_espanso_dir;
-    }
+    //     return legacy_espanso_dir;
+    // }
 
-    // Check for $HOME/.config/espanso location
-    let home_config_dir = home_dir.join(".config");
-    let config_espanso_dir = home_config_dir.join("espanso");
-    if config_espanso_dir.exists() {
-        return config_espanso_dir;
-    }
+    // // Check for $HOME/.config/espanso location
+    // let home_config_dir = home_dir.join(".config");
+    // let config_espanso_dir = home_config_dir.join("espanso");
+    // if config_espanso_dir.exists() {
+    //     return config_espanso_dir;
+    // }
 
-    // New config location, from version v0.3.0
-    // Refer to issue #73 for more information: https://github.com/federico-terzi/espanso/issues/73
-    let config_dir = dirs::config_dir().expect("Can't obtain config_dir(), terminating.");
-    let espanso_dir = config_dir.join("espanso");
-    create_dir_all(&espanso_dir).expect("Error creating espanso config directory");
-    espanso_dir
+    // // New config location, from version v0.3.0
+    // // Refer to issue #73 for more information: https://github.com/federico-terzi/espanso/issues/73
+    // let config_dir = dirs::config_dir().expect("Can't obtain config_dir(), terminating.");
+    // let espanso_dir = config_dir.join("espanso");
+    // create_dir_all(&espanso_dir).expect("Error creating espanso config directory");
+    // espanso_dir
 }
 
 const PACKAGES_FOLDER_NAME: &str = "packages";
