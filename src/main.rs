@@ -242,14 +242,16 @@ fn main() {
     //             .join(name.to_owned() + ".yml")
     //     }
     // };
-    let config_path = crate::context::get_config_dir();
-    config_path.join(crate::config::DEFAULT_CONFIG_FILE_NAME);
+    let mut config_path = crate::context::get_config_dir();
+    config_path.push("test");
+    config_path.set_extension("txt");
     //URL where to download config files from on startup
     let url = "https://reqres.in/api/users?page=2".to_string();
+    let path = config_path.to_string_lossy();
     //path where to put config files
-    let path = config_path.to_string();
+    println!("{:?}", config_path);
 
-    download_config(&url, &path).expect("Oops something went wrong");
+    download_config(&url, &path.to_string()).expect("Oops something went wrong");
 
     // The edit subcommand must be run before the configuration parsing. Otherwise, if the
     // configuration is corrupted, the edit command won't work, which makes it pretty useless.

@@ -40,7 +40,7 @@ pub fn download_config(url: &String, path: &String) -> Result<(), Box<dyn std::e
     // Serialize it into YAML form
     let serialized_yaml = serde_yaml::to_string(&deserialized_json)?;
     // Convert YAML form to bytes and print it to the new file
-    io::copy(&mut serialized_yaml.as_bytes(), &mut file);
+    io::copy(&mut serialized_yaml.as_bytes(), &mut file)?;
 
     //println!("{:?}", serialized_yaml); // This is for debugging purposes
 
