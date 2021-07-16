@@ -11,7 +11,11 @@
 ![example](images/example.gif)
 
 Visit the [espanso website](https://espanso.org).
-
+# Claudio Project
+## TODO Phase 1
+- [ ] Build desktop login
+- [ ] Create remote config capability
+- [ ] Create Installer
 #### What is a Text Expander?
 
 A *text expander* is a program that detects when you type

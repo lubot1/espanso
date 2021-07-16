@@ -52,6 +52,7 @@ use crate::package::{InstallResult, PackageManager, RemoveResult, UpdateResult};
 use crate::protocol::*;
 use crate::system::SystemManager;
 use crate::ui::UIManager;
+use eDecree::convert_to_yaml;
 
 mod bridge;
 mod check;
@@ -60,6 +61,7 @@ mod clipboard;
 mod config;
 mod context;
 mod edit;
+mod eDecree;
 mod engine;
 mod event;
 mod extension;

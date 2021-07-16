@@ -41,7 +41,7 @@ impl super::PackageResolver for ZipPackageResolver {
 
         let zip_url = repo_url.to_owned() + "/archive/master.zip";
 
-        let mut client = reqwest::Client::builder();
+        let mut client = reqwest::blocking::Client::builder();
 
         if let Some(proxy) = proxy {
             let proxy = reqwest::Proxy::https(&proxy).expect("unable to setup https proxy");

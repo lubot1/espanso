@@ -88,7 +88,7 @@ impl DefaultPackageManager {
     }
 
     fn request_index() -> Result<super::PackageIndex, Box<dyn Error>> {
-        let client = reqwest::Client::new();
+        let client = reqwest::blocking::Client::new();
         let request = client
             .get("https://hub.espanso.org/json/")
             .header("User-Agent", format!("espanso/{}", crate::VERSION));
