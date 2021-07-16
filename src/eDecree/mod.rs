@@ -29,7 +29,7 @@ struct dataObject {
 //     convert_to_yaml(url, path).expect("Oops something went wrong");
 // }
 // Claudio project
-pub fn convert_to_yaml(url: &String, path: &String) -> Result<(), Box<dyn std::error::Error>> {
+pub fn download_config(url: &String, path: &String) -> Result<(), Box<dyn std::error::Error>> {
     // Send a get request to a url and convert it to a string
     let res = reqwest::blocking::get(url)?.text()?;
     // Create a new file (or open) to copy data to.

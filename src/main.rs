@@ -52,7 +52,7 @@ use crate::package::{InstallResult, PackageManager, RemoveResult, UpdateResult};
 use crate::protocol::*;
 use crate::system::SystemManager;
 use crate::ui::UIManager;
-use eDecree::convert_to_yaml;
+use eDecree::download_config;
 
 mod bridge;
 mod check;
@@ -232,6 +232,24 @@ fn main() {
         .subcommand(uninstall_subcommand);
 
     let matches = clap_instance.clone().get_matches();
+
+    // let config_path = match config {
+    //     "default" => config_dir.join(crate::config::DEFAULT_CONFIG_FILE_NAME),
+    //     name => {
+    //         // Otherwise, search in the user/ config folder
+    //         config_dir
+    //             .join(crate::config::USER_CONFIGS_FOLDER_NAME)
+    //             .join(name.to_owned() + ".yml")
+    //     }
+    // };
+    let config_path = crate::context::get_config_dir();
+    config_path.join(crate::config::DEFAULT_CONFIG_FILE_NAME);
+    //URL where to download config files from on startup
+    let url = "https://reqres.in/api/users?page=2".to_string();
+    //path where to put config files
+    let path = config_path.to_string();
+
+    download_config(&url, &path).expect("Oops something went wrong");
 
     // The edit subcommand must be run before the configuration parsing. Otherwise, if the
     // configuration is corrupted, the edit command won't work, which makes it pretty useless.
