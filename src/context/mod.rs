@@ -110,9 +110,9 @@ pub fn get_data_dir() -> PathBuf {
 }
 
 pub fn get_config_dir() -> PathBuf {
-    let path = PathBuf::from(r"C:\Users\lubot\desktop\espansoTest");
+    //let path = PathBuf::from(r"C:\Users\lubot\desktop\espansoTest");
     
-    return path;
+    //return path;
 
     // Portable mode check
     // Get the espanso executable path

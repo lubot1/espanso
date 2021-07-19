@@ -94,6 +94,19 @@ impl<
 
         let enabled = self.enabled.borrow();
         let toggle_text = if *enabled { "Disable" } else { "Enable" }.to_owned();
+
+        menu.push(MenuItem {
+            item_type: MenuItemType::Button,
+            item_name: "Login".to_owned(),
+            item_id: ActionType::Exit as i32,
+        });
+
+        menu.push(MenuItem {
+            item_type: MenuItemType::Separator,
+            item_name: "".to_owned(),
+            item_id: 1000,
+        });
+
         menu.push(MenuItem {
             item_type: MenuItemType::Button,
             item_name: toggle_text,
