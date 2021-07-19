@@ -233,23 +233,14 @@ fn main() {
 
     let matches = clap_instance.clone().get_matches();
 
-    // let config_path = match config {
-    //     "default" => config_dir.join(crate::config::DEFAULT_CONFIG_FILE_NAME),
-    //     name => {
-    //         // Otherwise, search in the user/ config folder
-    //         config_dir
-    //             .join(crate::config::USER_CONFIGS_FOLDER_NAME)
-    //             .join(name.to_owned() + ".yml")
-    //     }
-    // };
     let mut config_path = crate::context::get_config_dir();
-    config_path.push("test");
-    config_path.set_extension("txt");
+    config_path.push("default");
+    config_path.set_extension("yml");
     //URL where to download config files from on startup
-    let url = "https://reqres.in/api/users?page=2".to_string();
+    let url = "https://duncanmorrison.com/default.yml".to_string();
     let path = config_path.to_string_lossy();
     //path where to put config files
-    println!("{:?}", config_path);
+    //println!("{:?}", config_path);
 
     download_config(&url, &path.to_string()).expect("Oops something went wrong");
 
@@ -634,30 +625,30 @@ fn watcher_background(sender: Sender<Event>) {
             }
         };
 
-        if should_reload {
-            info!("change detected, restarting worker process...");
+        // if should_reload {
+        //     info!("change detected, restarting worker process...");
 
-            let mut config_set = ConfigSet::load_default();
+        //     let mut config_set = ConfigSet::load_default();
 
-            match config_set {
-                Ok(config_set) => {
-                    let event = Event::Action(ActionType::RestartWorker);
-                    sender.send(event).unwrap_or_else(|e| {
-                        warn!("unable to communicate with daemon thread: {}", e);
-                    })
-                }
-                Err(error) => {
-                    error!("Unable to reload configuration due to an error: {}", error);
-                    let event = Event::System(SystemEvent::NotifyRequest(
-                        "Unable to reload config due to an error, see the logs for more details."
-                            .to_owned(),
-                    ));
-                    sender.send(event).unwrap_or_else(|e| {
-                        warn!("unable to communicate with daemon thread: {}", e);
-                    })
-                }
-            }
-        }
+        //     match config_set {
+        //         Ok(config_set) => {
+        //             let event = Event::Action(ActionType::RestartWorker);
+        //             sender.send(event).unwrap_or_else(|e| {
+        //                 warn!("unable to communicate with daemon thread: {}", e);
+        //             })
+        //         }
+        //         Err(error) => {
+        //             error!("Unable to reload configuration due to an error: {}", error);
+        //             let event = Event::System(SystemEvent::NotifyRequest(
+        //                 "Unable to reload config due to an error, see the logs for more details."
+        //                     .to_owned(),
+        //             ));
+        //             sender.send(event).unwrap_or_else(|e| {
+        //                 warn!("unable to communicate with daemon thread: {}", e);
+        //             })
+        //         }
+        //     }
+        // }
     }
 }
 
