@@ -104,7 +104,7 @@ impl<
         menu.push(MenuItem {
             item_type: MenuItemType::Separator,
             item_name: "".to_owned(),
-            item_id: 1000,
+            item_id: 997,
         });
 
         menu.push(MenuItem {

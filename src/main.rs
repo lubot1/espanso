@@ -52,7 +52,8 @@ use crate::package::{InstallResult, PackageManager, RemoveResult, UpdateResult};
 use crate::protocol::*;
 use crate::system::SystemManager;
 use crate::ui::UIManager;
-use eDecree::download_config;
+use eDecree::*;
+//use web_view::*;
 
 mod bridge;
 mod check;
@@ -260,7 +261,7 @@ fn main() {
     });
 
     config_set.default.log_level = log_level;
-
+    
     // Commands that require the configuration
 
     if let Some(matches) = matches.subcommand_matches("cmd") {
@@ -367,6 +368,8 @@ fn main() {
         .print_long_help()
         .expect("Unable to print help");
     println!();
+
+    
 }
 
 #[cfg(target_os = "windows")]
@@ -1303,11 +1306,11 @@ fn path_main(_config_set: ConfigSet, matches: &ArgMatches) {
     let data = crate::context::get_data_dir();
 
     if matches.subcommand_matches("config").is_some() {
-        println!("{}", config.to_string_lossy());
+        print!("{}", config.to_string_lossy());
     } else if matches.subcommand_matches("packages").is_some() {
-        println!("{}", packages.to_string_lossy());
+        print!("{}", packages.to_string_lossy());
     } else if matches.subcommand_matches("data").is_some() {
-        println!("{}", data.to_string_lossy());
+        print!("{}", data.to_string_lossy());
     } else if matches.subcommand_matches("default").is_some() {
         let default_file = config.join(crate::config::DEFAULT_CONFIG_FILE_NAME);
         println!("{}", default_file.to_string_lossy());
